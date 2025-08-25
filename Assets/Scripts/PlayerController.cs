@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float delay;
     [SerializeField] private Rigidbody2D player_Rigidbody;
     [SerializeField] private Animator player_animator;
+    [SerializeField] private Transform player_point;
 
     private Collider2D player_collider;
 
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     {
        player_Rigidbody = GetComponent<Rigidbody2D>();
        player_collider = GetComponent<Collider2D>();
+
+        transform.position = player_point.position;
     }
     private void Update()
     {
@@ -69,10 +72,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 땅에 찾지 했을때
         if (collision.gameObject.CompareTag("Ground"))
         {
             isJump = false;
             Debug.Log("플레이어 찾지");
         }
+
+        // 성을 충돌했을때
+        if (collision.gameObject.CompareTag("Castle"))
+        {
+            Debug.Log("게임 클리어");
+        }
+
+
+        // 필드 밖으로 추락 시 처리
+        if (collision.gameObject.CompareTag("ExitFildGround"))
+            transform.position = player_point.position;
     }
 }
