@@ -9,15 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float delay;
     [SerializeField] private Rigidbody2D player_Rigidbody;
     [SerializeField] private Animator player_animator;
-    [SerializeField] private Transform player_point;
+    public Transform player_point;
+
 
     private Collider2D player_collider;
 
     private bool isJump;
 
+    private GameManager gameManager;
+
 
     private void Start()
     {
+       gameManager = FindAnyObjectByType<GameManager>();
        player_Rigidbody = GetComponent<Rigidbody2D>();
        player_collider = GetComponent<Collider2D>();
 
@@ -25,12 +29,14 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Jump();
+        if (!gameManager.isUICanvers ||!gameManager.isFnishUICanvers)
+            Jump();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if (!gameManager.isUICanvers)
+            Move();
     }
 
    void Move()
@@ -82,7 +88,7 @@ public class PlayerController : MonoBehaviour
         // 성을 충돌했을때
         if (collision.gameObject.CompareTag("Castle"))
         {
-            Debug.Log("게임 클리어");
+            gameManager.CollisionCastle();
         }
 
 
