@@ -18,14 +18,13 @@ public class viewManager : MonoBehaviour
     {
         Camera.main.backgroundColor = Color.black;
 
-        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
     }
 
     private void Update()
     {
-        if(Screen.width != 1920  && Screen.height != 1080 && Screen.fullScreenMode != FullScreenMode.Windowed)
+        if(Screen.width != 1920  || Screen.height != 1080 || Screen.fullScreenMode != FullScreenMode.FullScreenWindow)
         {
-            Screen.SetResolution(1920,  1080, FullScreenMode.Windowed);
+            Screen.SetResolution(1920,  1080, FullScreenMode.FullScreenWindow);
         }
     }
 }

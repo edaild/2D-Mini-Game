@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (!gameManager.isUICanvers ||!gameManager.isFnishUICanvers)
+        if (!gameManager.isUICanvers)
             Jump();
     }
 
